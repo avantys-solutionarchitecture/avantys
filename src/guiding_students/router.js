@@ -58,15 +58,15 @@ router.get("/students/:id", getNotes);
  *        - application/json
  *      parameters:
  *        - name: student
- *          description: The notes for the specified student
+ *          description: The ID of the student
  *          required: true
  *          in: formData
- *          type: Student
+ *          type: string
  *        - name: teacher
- *          description: The teacher who made the notes
+ *          description: The ID of the teacher
  *          required: true
  *          in: formData
- *          type: Teacher
+ *          type: string
  *        - name: notes
  *          description: The contents of the notes
  *          required: true
