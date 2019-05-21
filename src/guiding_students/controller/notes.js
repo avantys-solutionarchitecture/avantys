@@ -32,18 +32,15 @@ const getNotes = async ({ params: { id } }, res, next) =>
  * @param {Function} next
  * @returns {Promise<*>}
  */
-const createNotes = async ({ body }, res, next) => {
-    console.log(body)
+const createNotes = async ({ body }, res, next) => 
+  await new Notes(body, {})
+    .save()
+    .then(result => {
 
-    await new Notes(body, {})
-      .save()
-      .then(result => {
-
-        sendToQueue(NotesCreated({ ...body, _id: result.id }));
-        return res.redirect(303, "notes");
-      })
-      .catch(next => console.log(next));
-  }
+      sendToQueue(NotesCreated({ ...body, _id: result.id }));
+      return res.redirect(303, "notes");
+    })
+    .catch(next => console.log(next));
 
 module.exports = {
   createNotes,
