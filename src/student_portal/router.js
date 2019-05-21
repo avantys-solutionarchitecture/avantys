@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 let Study_Material = require("./models/study_material").Study_Material;
+let Student = require("./model/student").Student;
 
 /**
  * @swagger
@@ -163,5 +164,62 @@ router.get("/studymaterial", (req, res) => {
         res.status(400).json(error);
       });
   });
+
+  /**
+ * @swagger
+ * /students:
+ *    get:
+ *      description: Return list of students
+ *      produces:
+ *        - application/json
+ *      responses:
+ *        201:
+ *          description: Return created students
+ *        400:
+ *          description: Something unexpected went wrong
+ */
+
+router.get("/students", (req, res) => {
+  Student.find()
+    .then(students => {
+      if (students == null || students == []) {
+        res.status(200).json({ message: "no students found" });
+      }
+      res.status(200).json(students);
+    })
+    .catch(error => res.status(401).json(error));
+});
+
+/**
+ * @swagger
+ * /student/{id}:
+ *    get:
+ *      description: Return student
+ *      produces:
+ *        - application/json
+ *      parameters:
+ *       - name: id
+ *         description: The Student Number of the Student
+ *         required: true
+ *         in: path
+ *         type: string
+ *      responses:
+ *        201:
+ *          description: Return created students
+ *        400:
+ *          description: Something unexpected went wrong
+ */
+
+router.get("/student/:_id", ({ params: { _id } }, res) => {
+  res.contentType("application/json");
+  Student.findOne({ _id })
+    .then(student => {
+      if (student == null) {
+        res.status(200).json({ message: "student not found" });
+      }
+      res.status(200).json(student);
+    })
+    .catch(error => res.status(401).json(error));
+});
 
 module.exports = router;
