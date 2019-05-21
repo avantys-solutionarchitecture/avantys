@@ -5,6 +5,8 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const router = require("./router");
 const app = express();
 
+const rabbit = require("./rabbit/rabbot");
+
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
@@ -22,11 +24,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 const specs = swaggerJsdoc(swaggerOptions);
 const swaggerUi = require("swagger-ui-express");
 
-app.use(
-  "/api/v1/accounting/swagger",
-  swaggerUi.serve,
-  swaggerUi.setup(specs)
-);
+app.use("/api/v1/accounting/swagger", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/api/v1/accounting", router);
 
