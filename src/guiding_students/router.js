@@ -47,11 +47,11 @@ router.get("/notes", getAllNotes);
  *        404:
  *          description: No notes found by that ID
  */
-router.get("/students/:id", getNotes);
+router.get("/notes/:id", getNotes);
 
 /**
  * @swagger
- * /students:
+ * /notes:
  *    post:
  *      description: Create notes
  *      produces:
@@ -70,7 +70,7 @@ router.get("/students/:id", getNotes);
  *        - name: notes
  *          description: The contents of the notes
  *          required: true
- *          in: path
+ *          in: formData
  *          type: string
  *      responses:
  *        302:

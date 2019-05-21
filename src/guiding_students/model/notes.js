@@ -1,16 +1,14 @@
 const mongoose = require("../config/db");
 const Schema = mongoose.Schema;
-const Student = require("./student").studentSchema;
-const Teacher = require("./teacher").teacherSchema;
 
 const notesSchema = new Schema({
   student: {
-    type: Student,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: 'Student'
   },
   teacher: {
-    type: Teacher,
-    required: true
+    type: Schema.Types.ObjectId,
+    ref: 'Teacher'
   },
   notes: {
     type: String,
