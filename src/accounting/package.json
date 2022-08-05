@@ -12,7 +12,7 @@
   "dependencies": {
     "eventstore": "^1.14.4",
     "express": "^4.16.4",
-    "mongoose": "^5.5.7",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "prettier": "^1.17.0",
     "rabbot": "^2.1.0",
